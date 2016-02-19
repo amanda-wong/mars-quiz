@@ -1,8 +1,4 @@
 import React from 'react';
-import { Router, Route, browserHistory, Redirect } from 'react-router';
-
-
-//components
 
 var Question = React.createClass({
 
@@ -16,8 +12,7 @@ var Question = React.createClass({
                     </div>
                 </div>
                 <div className="right-main">
-                    <button className="take-test-button">Take Test</button>
-                    <button className="main begin-eval-button">Begin Evaluation</button>
+                    <button className="begin-eval-button">Begin Evaluation</button>
                 </div>
             </div>
         )

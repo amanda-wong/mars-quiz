@@ -62,9 +62,9 @@ var historyApiFallback = require('connect-history-api-fallback');
         }
     });
         gulp.watch(['./src/index.html'], ['copy-html']);
-    	gulp.watch(['main.jsx'], ['compile-react']);
-        gulp.watch(['scss/*.scss'], ['gulpsass']);
-        gulp.watch(['./build/js/main.js', './build/index-copy.html', './build/css/style.min.css']).on('change', browserSync.reload);
+    	gulp.watch(['./src/main.jsx'], ['compile-react']);
+        gulp.watch(['./src/scss/*.scss'], ['gulpsass']);
+        gulp.watch(['./build/js/main.js', './build/index.html', './build/css/style.min.css']).on('change', browserSync.reload);
     });
 
     gulp.task('default', ['browser-sync', 'gulpsass']);

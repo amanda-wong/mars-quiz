@@ -11,11 +11,12 @@ var Welcome = React.createClass({
                     </div>
                 </div>
                 <div className="right-main">
+                    <h1>Welcome to NASA's official mission to Mars site! </h1>
+                    <p>To find out whether you are eligible, take quiz now.</p>
                     <button className="take-test-button">Take Test</button>
-                    <button className="begin-eval-button">Begin Evaluation</button>
                 </div>
             </div>
-        );
+        )
     }
 });
 

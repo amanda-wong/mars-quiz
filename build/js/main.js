@@ -24718,52 +24718,43 @@
 /* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactRouter = __webpack_require__(159);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	//components
-
 	var Question = _react2.default.createClass({
-	    displayName: 'Question',
+	    displayName: "Question",
 
 
 	    render: function render() {
 	        return _react2.default.createElement(
-	            'div',
-	            { className: 'main-wrap' },
+	            "div",
+	            { className: "main-wrap" },
 	            _react2.default.createElement(
-	                'div',
-	                { className: 'left-panel' },
+	                "div",
+	                { className: "left-panel" },
 	                _react2.default.createElement(
-	                    'h1',
+	                    "h1",
 	                    null,
-	                    'Mars'
+	                    "Mars"
 	                ),
 	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'shuttle-wrap' },
-	                    _react2.default.createElement('i', { className: 'fa fa-space-shuttle' })
+	                    "div",
+	                    { className: "shuttle-wrap" },
+	                    _react2.default.createElement("i", { className: "fa fa-space-shuttle" })
 	                )
 	            ),
 	            _react2.default.createElement(
-	                'div',
-	                { className: 'right-main' },
+	                "div",
+	                { className: "right-main" },
 	                _react2.default.createElement(
-	                    'button',
-	                    { className: 'take-test-button' },
-	                    'Take Test'
-	                ),
-	                _react2.default.createElement(
-	                    'button',
-	                    { className: 'main begin-eval-button' },
-	                    'Begin Evaluation'
+	                    "button",
+	                    { className: "begin-eval-button" },
+	                    "Begin Evaluation"
 	                )
 	            )
 	        );
@@ -24802,7 +24793,7 @@
 /* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var _react = __webpack_require__(1);
 
@@ -24811,13 +24802,45 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Welcome = _react2.default.createClass({
-	    displayName: 'Welcome',
+	    displayName: "Welcome",
 
 	    render: function render() {
 	        return _react2.default.createElement(
-	            'div',
-	            null,
-	            'hello'
+	            "div",
+	            { className: "main-wrap" },
+	            _react2.default.createElement(
+	                "div",
+	                { className: "left-panel" },
+	                _react2.default.createElement(
+	                    "h1",
+	                    null,
+	                    "Mars"
+	                ),
+	                _react2.default.createElement(
+	                    "div",
+	                    { className: "shuttle-wrap" },
+	                    _react2.default.createElement("i", { className: "fa fa-space-shuttle" })
+	                )
+	            ),
+	            _react2.default.createElement(
+	                "div",
+	                { className: "right-main" },
+	                _react2.default.createElement(
+	                    "h1",
+	                    null,
+	                    "Welcome to NASA's official mission to Mars site! "
+	                ),
+	                _react2.default.createElement(
+	                    "p",
+	                    null,
+	                    "To find out whether you are eligible, take quiz now."
+	                ),
+	                _react2.default.createElement(
+	                    "button",
+	                    { className: "take-test-button" },
+	                    "Take Test"
+	                )
+	            )
 	        );
 	    }
 	});
