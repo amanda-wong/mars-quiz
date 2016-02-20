@@ -12,7 +12,6 @@ var	rename = require('gulp-rename');
 var notify = require('gulp-notify');
 var historyApiFallback = require('connect-history-api-fallback');
 
-
     gulp.task('compile-react', function() {
 	return gulp.src('./src/main.jsx')
 	.pipe(plumber({errorHandler: notify.onError('Error: <%= error.message %>')}))
@@ -62,6 +61,7 @@ var historyApiFallback = require('connect-history-api-fallback');
         }
     });
         gulp.watch(['./src/index.html'], ['copy-html']);
+        gulp.watch(['./src/components/*.jsx'], ['compile-react']);
     	gulp.watch(['./src/main.jsx'], ['compile-react']);
         gulp.watch(['./src/scss/*.scss'], ['gulpsass']);
         gulp.watch(['./build/js/main.js', './build/index.html', './build/css/style.min.css']).on('change', browserSync.reload);

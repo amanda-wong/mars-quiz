@@ -5,6 +5,11 @@ import { Router, Route, browserHistory, Redirect } from 'react-router';
 import Question from './components/question-page.jsx';
 import NotFound from './components/404-page.jsx';
 import Welcome from './components/welcome-page.jsx';
+import Timer from './components/timer.jsx';
+
+
+// <Route path='/accepted' component={Accepted}/>
+// <Route path='/rejected' component={Rejected}/>
 
 var App = React.createClass({
 

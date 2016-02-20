@@ -3,11 +3,9 @@ import React from 'react';
 var NotFound = React.createClass({
     render: function(){
         return (
-
-
-
-<div>hello</div>
-
+            <div>
+            <h1 className="pgNotFound">404 Page Not Found</h1>
+            </div>
         );
     }
 });

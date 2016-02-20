@@ -1,22 +1,28 @@
 import React from 'react';
+import {browserHistory} from 'react-router';
+import Timer from './timer.jsx';
 
 var Question = React.createClass({
 
+    getInitialState: function() {
+        return {
+            startTimer: false
+        };
+    },
+
+    startTest: function(){
+        this.setState({ startTimer: true
+        })
+    },
+
     render: function(){
         return (
-            <div className="main-wrap">
-                <div className="left-panel">
-                    <h1>Mars</h1>
-                    <div className="shuttle-wrap">
-                        <i className="fa fa-space-shuttle"></i>
-                    </div>
-                </div>
-                <div className="right-main">
-                    <button className="begin-eval-button">Begin Evaluation</button>
-                </div>
+            <div>
+                <Timer startCountDown={this.state.startTimer}/>
+                <button className="begin-eval-button" onClick={this.startTest}>Begin Evaluation</button>
             </div>
-        )
-    }
-});
+            );
+        }
+    });
 
 module.exports = Question;

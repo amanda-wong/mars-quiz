@@ -1,42 +1,41 @@
-import React from 'react';
+    import React from 'react';
 
-var Timer = React.createClass({
+    var Timer = React.createClass({
 
-  getInitialState: function() {
-    return {
-    secondsElapsed: 0
-    }
-  },
+      getInitialState: function() {
+        return {
+            secondsRemaining: 60
+        }
+      },
 
-  resetTimer: function(){
-    clearInterval(this.interval);
-    this.setState({ secondsElapsed: 0 });
-    this.start();
-  },
+      resetTimer: function(){
+        clearInterval(this.interval);
+      },
 
-  tick: function(){
-    this.setState({
-    secondsElapsed: this.state.secondsElapsed +1});
-  },
+      tick: function(){
+        this.setState({secondsRemaining: this.state.secondsRemaining - 1});
+        if (this.state.secondsRemaining <= 0 ) {
+            this.resetTimer();
+        }
+      },
 
-  start: function() {
-    this.interval = setInterval(this.tick, 1000);
-  },
+      startTimer: function() {
+        this.interval = setInterval(this.tick, 1000);
+      },
 
-  componentDidMount: function(){
-     setTimeout(this.start, this.props.timeout);
-  }
+      componentWillReceiveProps: function(props) {
+          if(props.startCountDown === true) {
+              this.startTimer();
+          }
+      },
 
-  render: function() {
-    return (
-    <div>
-      <Timer timeout={0} onClick={this.begin-eval-button} />
-    </div>
-    )
-  }
-});
+      render: function() {
+        return (
+            <div>
+              <p className="timer">{this.state.secondsRemaining}</p>
+            </div>
+        );
+      }
+    });
 
-
-
-
-module.exports = Timer;
+    module.exports = Timer;

@@ -60,15 +60,22 @@
 
 	var _questionPage2 = _interopRequireDefault(_questionPage);
 
-	var _page = __webpack_require__(217);
+	var _page = __webpack_require__(218);
 
 	var _page2 = _interopRequireDefault(_page);
 
-	var _welcomePage = __webpack_require__(218);
+	var _welcomePage = __webpack_require__(219);
 
 	var _welcomePage2 = _interopRequireDefault(_welcomePage);
 
+	var _timer = __webpack_require__(217);
+
+	var _timer2 = _interopRequireDefault(_timer);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// <Route path='/accepted' component={Accepted}/>
+	// <Route path='/rejected' component={Rejected}/>
 
 	var App = _react2.default.createClass({
 	    displayName: 'App',
@@ -24718,44 +24725,44 @@
 /* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouter = __webpack_require__(159);
+
+	var _timer = __webpack_require__(217);
+
+	var _timer2 = _interopRequireDefault(_timer);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Question = _react2.default.createClass({
-	    displayName: "Question",
+	    displayName: 'Question',
 
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            startTimer: false
+	        };
+	    },
+
+	    startTest: function startTest() {
+	        this.setState({ startTimer: true
+	        });
+	    },
 
 	    render: function render() {
 	        return _react2.default.createElement(
-	            "div",
-	            { className: "main-wrap" },
+	            'div',
+	            null,
+	            _react2.default.createElement(_timer2.default, { startCountDown: this.state.startTimer }),
 	            _react2.default.createElement(
-	                "div",
-	                { className: "left-panel" },
-	                _react2.default.createElement(
-	                    "h1",
-	                    null,
-	                    "Mars"
-	                ),
-	                _react2.default.createElement(
-	                    "div",
-	                    { className: "shuttle-wrap" },
-	                    _react2.default.createElement("i", { className: "fa fa-space-shuttle" })
-	                )
-	            ),
-	            _react2.default.createElement(
-	                "div",
-	                { className: "right-main" },
-	                _react2.default.createElement(
-	                    "button",
-	                    { className: "begin-eval-button" },
-	                    "Begin Evaluation"
-	                )
+	                'button',
+	                { className: 'begin-eval-button', onClick: this.startTest },
+	                'Begin Evaluation'
 	            )
 	        );
 	    }
@@ -24767,7 +24774,7 @@
 /* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var _react = __webpack_require__(1);
 
@@ -24775,19 +24782,51 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var NotFound = _react2.default.createClass({
-	    displayName: 'NotFound',
+	var Timer = _react2.default.createClass({
+	    displayName: "Timer",
+
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            secondsRemaining: 60
+	        };
+	    },
+
+	    resetTimer: function resetTimer() {
+	        clearInterval(this.interval);
+	    },
+
+	    tick: function tick() {
+	        this.setState({ secondsRemaining: this.state.secondsRemaining - 1 });
+	        if (this.state.secondsRemaining <= 0) {
+	            this.resetTimer();
+	        }
+	    },
+
+	    startTimer: function startTimer() {
+	        this.interval = setInterval(this.tick, 1000);
+	    },
+
+	    componentWillReceiveProps: function componentWillReceiveProps(props) {
+	        if (props.startCountDown === true) {
+	            this.startTimer();
+	        }
+	    },
 
 	    render: function render() {
 	        return _react2.default.createElement(
-	            'div',
+	            "div",
 	            null,
-	            'hello'
+	            _react2.default.createElement(
+	                "p",
+	                { className: "timer" },
+	                this.state.secondsRemaining
+	            )
 	        );
 	    }
 	});
 
-	module.exports = NotFound;
+	module.exports = Timer;
 
 /***/ },
 /* 218 */
@@ -24801,45 +24840,53 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Welcome = _react2.default.createClass({
-	    displayName: "Welcome",
+	var NotFound = _react2.default.createClass({
+	    displayName: "NotFound",
 
 	    render: function render() {
 	        return _react2.default.createElement(
 	            "div",
-	            { className: "main-wrap" },
+	            null,
 	            _react2.default.createElement(
-	                "div",
-	                { className: "left-panel" },
-	                _react2.default.createElement(
-	                    "h1",
-	                    null,
-	                    "Mars"
-	                ),
-	                _react2.default.createElement(
-	                    "div",
-	                    { className: "shuttle-wrap" },
-	                    _react2.default.createElement("i", { className: "fa fa-space-shuttle" })
-	                )
-	            ),
+	                "h1",
+	                { className: "pgNotFound" },
+	                "404 Page Not Found"
+	            )
+	        );
+	    }
+	});
+
+	module.exports = NotFound;
+
+/***/ },
+/* 219 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(159);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Welcome = _react2.default.createClass({
+	    displayName: 'Welcome',
+	    takeQuiz: function takeQuiz() {
+	        _reactRouter.browserHistory.push('/mars-quiz');
+	    },
+
+
+	    render: function render() {
+	        return _react2.default.createElement(
+	            'div',
+	            null,
 	            _react2.default.createElement(
-	                "div",
-	                { className: "right-main" },
-	                _react2.default.createElement(
-	                    "h1",
-	                    null,
-	                    "Welcome to NASA's official mission to Mars site! "
-	                ),
-	                _react2.default.createElement(
-	                    "p",
-	                    null,
-	                    "To find out whether you are eligible, take quiz now."
-	                ),
-	                _react2.default.createElement(
-	                    "button",
-	                    { className: "take-test-button" },
-	                    "Take Test"
-	                )
+	                'button',
+	                { className: 'take-test-button', onClick: this.takeQuiz },
+	                'Take Test'
 	            )
 	        );
 	    }
