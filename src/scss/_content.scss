@@ -100,17 +100,38 @@
         color: #00EE00;
     }
 
-    .questions-wrap {
+    .test-questions-wrap {
         position:relative;
-        width: 600px;
-        height: 250px;
+        flex-wrap: wrap;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 900px;
+        height: 300px;
         display: flex;
         background-color: #fff;
-        border: 2px solid #636363;
-        border-radius: 12px;
+        p {
+            font-size: 25px;
+            font-weight: bold;
+            color: #c2c2c2;   
+        }
     }
 
-    .subtmitButton {
+    input[type="text"] {
+        display: flex;
+        width: 700px;
+        height: 50px;
+        border: none;
+        border-bottom: 1px solid #000;
+        font-size: 22px;
+        line-height: -20px;
+        margin-bottom: 150px;
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .submitButton {
         position: absolute;
         bottom: 20px;
         right: 20px;

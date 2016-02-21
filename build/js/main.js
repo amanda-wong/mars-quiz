@@ -24741,9 +24741,10 @@
 
 	var QuestionPage = _react2.default.createClass({
 	    displayName: 'QuestionPage',
-
+	    //Question-Page component
 
 	    getInitialState: function getInitialState() {
+	        // The initial state: At step 0, the timer is off the page and it does not count
 	        return {
 	            startTimer: false,
 	            timerPosition: -200,
@@ -24752,6 +24753,7 @@
 	    },
 
 	    startTest: function startTest() {
+	        // The startTest state: At step 1, the timer is in view and is counting down
 	        this.setState({
 	            startTimer: true,
 	            timerPosition: 20,
@@ -24760,9 +24762,10 @@
 	    },
 
 	    render: function render() {
-
-	        var timerWrapStyle = {
-	            right: this.state.timerPosition + 'px'
+	        // rendering 1: timerWrapStyle swinging in the timer
+	        // rendering 2: when step is at 0, eval button disappears
+	        var timerWrapStyle = { // rendering 3: when at step 1, 2 or 3, brings up question 1, 2, or 3
+	            right: this.state.timerPosition + 'px' // return
 	        };
 
 	        var startButton;
@@ -24790,12 +24793,8 @@
 	                { className: 'timer-wrap', style: timerWrapStyle },
 	                _react2.default.createElement(_timer2.default, { isEnabled: this.state.startTimer })
 	            ),
-	            _react2.default.createElement(
-	                'div',
-	                { className: 'questions-wrap' },
-	                currentQuestion,
-	                startButton
-	            )
+	            currentQuestion,
+	            startButton
 	        );
 	    }
 	});
@@ -24883,9 +24882,7 @@
 	    displayName: 'Question',
 
 
-	    submitAnswer: function submitAnswer() {
-	        alert('hello');
-	    },
+	    submitAnswer: function submitAnswer() {},
 
 	    render: function render() {
 	        return _react2.default.createElement(
@@ -24899,7 +24896,7 @@
 	            _react2.default.createElement('input', { type: 'text' }),
 	            _react2.default.createElement(
 	                'button',
-	                { onClick: this.submitAnswer },
+	                { className: 'submitButton', onClick: this.submitAnswer },
 	                'Submit'
 	            )
 	        );

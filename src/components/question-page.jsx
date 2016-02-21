@@ -3,9 +3,9 @@ import {browserHistory} from 'react-router';
 import Timer from './timer.jsx';
 import Question from './question.jsx';
 
-var QuestionPage = React.createClass({
+var QuestionPage = React.createClass({  //Question-Page component
 
-    getInitialState: function() {
+    getInitialState: function() {       // The initial state: At step 0, the timer is off the page and it does not count
         return {
             startTimer: false,
             timerPosition: -200,
@@ -13,7 +13,7 @@ var QuestionPage = React.createClass({
         };
     },
 
-    startTest: function() {
+    startTest: function() {             // The startTest state: At step 1, the timer is in view and is counting down
         this.setState({
             startTimer: true,
             timerPosition: 20,
@@ -21,10 +21,10 @@ var QuestionPage = React.createClass({
         });
     },
 
-    render: function() {
-
-        var timerWrapStyle = {
-            right: this.state.timerPosition + 'px'
+    render: function() {                            // rendering 1: timerWrapStyle swinging in the timer
+                                                    // rendering 2: when step is at 0, eval button disappears
+        var timerWrapStyle = {                      // rendering 3: when at step 1, 2 or 3, brings up question 1, 2, or 3
+            right: this.state.timerPosition + 'px'   // return
         };
 
         var startButton;
@@ -45,10 +45,8 @@ var QuestionPage = React.createClass({
                 <div className="timer-wrap" style={timerWrapStyle}>
                     <Timer isEnabled={this.state.startTimer}/>
                 </div>
-                <div className="questions-wrap">
                     {currentQuestion}
                     {startButton}
-                </div>
             </div>
         );
     }
