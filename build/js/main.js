@@ -60,17 +60,13 @@
 
 	var _questionPage2 = _interopRequireDefault(_questionPage);
 
-	var _page = __webpack_require__(218);
+	var _page = __webpack_require__(219);
 
 	var _page2 = _interopRequireDefault(_page);
 
-	var _welcomePage = __webpack_require__(219);
+	var _welcomePage = __webpack_require__(220);
 
 	var _welcomePage2 = _interopRequireDefault(_welcomePage);
-
-	var _timer = __webpack_require__(217);
-
-	var _timer2 = _interopRequireDefault(_timer);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24737,38 +24733,74 @@
 
 	var _timer2 = _interopRequireDefault(_timer);
 
+	var _question = __webpack_require__(218);
+
+	var _question2 = _interopRequireDefault(_question);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Question = _react2.default.createClass({
-	    displayName: 'Question',
+	var QuestionPage = _react2.default.createClass({
+	    displayName: 'QuestionPage',
 
 
 	    getInitialState: function getInitialState() {
 	        return {
-	            startTimer: false
+	            startTimer: false,
+	            timerPosition: -200,
+	            step: 0
 	        };
 	    },
 
 	    startTest: function startTest() {
-	        this.setState({ startTimer: true
+	        this.setState({
+	            startTimer: true,
+	            timerPosition: 20,
+	            step: 1
 	        });
 	    },
 
 	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(_timer2.default, { startCountDown: this.state.startTimer }),
-	            _react2.default.createElement(
+
+	        var timerWrapStyle = {
+	            right: this.state.timerPosition + 'px'
+	        };
+
+	        var startButton;
+	        var currentQuestion;
+
+	        if (this.state.step === 1) {
+	            currentQuestion = _react2.default.createElement(_question2.default, { question: 'Are you a Canuck fan, yes or no?' });
+	        } else if (this.state.step === 2) {
+	            currentQuestion = _react2.default.createElement(_question2.default, { question: 'Mars is what number planet from the sun?' });
+	        } else if (this.state.step === 3) {
+	            currentQuestion = _react2.default.createElement(_question2.default, { question: 'How many seconds can you hold your breath?' });
+	        } else if (this.state.step === 0) {
+	            startButton = _react2.default.createElement(
 	                'button',
 	                { className: 'begin-eval-button', onClick: this.startTest },
 	                'Begin Evaluation'
+	            );
+	        }
+
+	        return _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(
+	                'div',
+	                { className: 'timer-wrap', style: timerWrapStyle },
+	                _react2.default.createElement(_timer2.default, { isEnabled: this.state.startTimer })
+	            ),
+	            _react2.default.createElement(
+	                'div',
+	                { className: 'questions-wrap' },
+	                currentQuestion,
+	                startButton
 	            )
 	        );
 	    }
 	});
 
-	module.exports = Question;
+	module.exports = QuestionPage;
 
 /***/ },
 /* 217 */
@@ -24787,41 +24819,46 @@
 
 
 	    getInitialState: function getInitialState() {
+	        if (this.props.isEnabled) {
+	            this.startTimer();
+	        }
+
 	        return {
 	            secondsRemaining: 60
 	        };
+	    },
+
+	    componentWillReceiveProps: function componentWillReceiveProps(props) {
+	        if (props.isEnabled) {
+	            this.startTimer();
+	        }
 	    },
 
 	    resetTimer: function resetTimer() {
 	        clearInterval(this.interval);
 	    },
 
-	    tick: function tick() {
-	        this.setState({ secondsRemaining: this.state.secondsRemaining - 1 });
-	        if (this.state.secondsRemaining <= 0) {
-	            this.resetTimer();
+	    startTimer: function startTimer() {
+	        if (!this.interval) {
+	            this.interval = setInterval(this.tick, 1000);
 	        }
 	    },
 
-	    startTimer: function startTimer() {
-	        this.interval = setInterval(this.tick, 1000);
-	    },
+	    tick: function tick() {
+	        this.setState({
+	            secondsRemaining: this.state.secondsRemaining - 1
+	        });
 
-	    componentWillReceiveProps: function componentWillReceiveProps(props) {
-	        if (props.startCountDown === true) {
-	            this.startTimer();
+	        if (this.state.secondsRemaining <= 0) {
+	            this.resetTimer();
 	        }
 	    },
 
 	    render: function render() {
 	        return _react2.default.createElement(
 	            "div",
-	            null,
-	            _react2.default.createElement(
-	                "p",
-	                { className: "timer" },
-	                this.state.secondsRemaining
-	            )
+	            { className: "timer" },
+	            this.state.secondsRemaining
 	        );
 	    }
 	});
@@ -24830,6 +24867,49 @@
 
 /***/ },
 /* 218 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(159);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Question = _react2.default.createClass({
+	    displayName: 'Question',
+
+
+	    submitAnswer: function submitAnswer() {
+	        alert('hello');
+	    },
+
+	    render: function render() {
+	        return _react2.default.createElement(
+	            'div',
+	            { className: 'test-questions-wrap' },
+	            _react2.default.createElement(
+	                'p',
+	                null,
+	                this.props.question
+	            ),
+	            _react2.default.createElement('input', { type: 'text' }),
+	            _react2.default.createElement(
+	                'button',
+	                { onClick: this.submitAnswer },
+	                'Submit'
+	            )
+	        );
+	    }
+	});
+
+	module.exports = Question;
+
+/***/ },
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -24845,13 +24925,9 @@
 
 	    render: function render() {
 	        return _react2.default.createElement(
-	            "div",
-	            null,
-	            _react2.default.createElement(
-	                "h1",
-	                { className: "pgNotFound" },
-	                "404 Page Not Found"
-	            )
+	            "h1",
+	            { className: "pgNotFound" },
+	            "404 Page Not Found"
 	        );
 	    }
 	});
@@ -24859,7 +24935,7 @@
 	module.exports = NotFound;
 
 /***/ },
-/* 219 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24872,8 +24948,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Welcome = _react2.default.createClass({
-	    displayName: 'Welcome',
+	var WelcomePage = _react2.default.createClass({
+	    displayName: 'WelcomePage',
 	    takeQuiz: function takeQuiz() {
 	        _reactRouter.browserHistory.push('/mars-quiz');
 	    },
@@ -24892,7 +24968,7 @@
 	    }
 	});
 
-	module.exports = Welcome;
+	module.exports = WelcomePage;
 
 /***/ }
 /******/ ]);

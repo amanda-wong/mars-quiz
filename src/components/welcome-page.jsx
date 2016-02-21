@@ -1,6 +1,6 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
-var Welcome = React.createClass({
+var WelcomePage = React.createClass({
 
     takeQuiz() {
         browserHistory.push('/mars-quiz');
@@ -15,4 +15,4 @@ var Welcome = React.createClass({
         }
     });
 
-module.exports = Welcome;
+module.exports = WelcomePage;

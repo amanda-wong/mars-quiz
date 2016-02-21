@@ -12,7 +12,7 @@ var	rename = require('gulp-rename');
 var notify = require('gulp-notify');
 var historyApiFallback = require('connect-history-api-fallback');
 
-    gulp.task('compile-react', function() {
+gulp.task('compile-react', function() {
 	return gulp.src('./src/main.jsx')
 	.pipe(plumber({errorHandler: notify.onError('Error: <%= error.message %>')}))
 	.pipe(webpack({
@@ -35,31 +35,30 @@ var historyApiFallback = require('connect-history-api-fallback');
 	.pipe(gulp.dest('./build/js'));
 });
 
-    gulp.task('gulpsass', function() {
-       gulp.src('./src/scss/*.scss')
-          .pipe(gulpsass())
-          .pipe(autoprefixer({
-             browsers: ['last 2 versions']
-          }))
-          .pipe(gulp.dest('./build/css'))
-          .pipe(minifyCSS())
-          .pipe(rename({extname: '.min.css'}))
-          .pipe(gulp.dest('./build/css'));
-    });
+gulp.task('gulpsass', function() {
+   gulp.src('./src/scss/*.scss')
+      .pipe(gulpsass())
+      .pipe(autoprefixer({
+         browsers: ['last 2 versions']
+      }))
+      .pipe(gulp.dest('./build/css'))
+      .pipe(minifyCSS())
+      .pipe(rename({extname: '.min.css'}))
+      .pipe(gulp.dest('./build/css'));
+});
 
-    gulp.task('copy-html', function() {
-        gulp.src('./src/index.html')
-            .pipe(gulp.dest('./build'));
-    });
+gulp.task('copy-html', function() {
+    gulp.src('./src/index.html')
+        .pipe(gulp.dest('./build'));
+});
 
-    gulp.task('browser-sync', ['compile-react','copy-html'],  function() {
-
-    	browserSync.init({
-    		server: {
-            baseDir: './build/',
-            middleware: [historyApiFallback()]
-        }
-    });
+gulp.task('browser-sync', ['compile-react','copy-html'],  function() {
+	browserSync.init({
+		server: {
+        baseDir: './build/',
+        middleware: [historyApiFallback()]
+    }
+});
         gulp.watch(['./src/index.html'], ['copy-html']);
         gulp.watch(['./src/components/*.jsx'], ['compile-react']);
     	gulp.watch(['./src/main.jsx'], ['compile-react']);

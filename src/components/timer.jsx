@@ -1,41 +1,50 @@
-    import React from 'react';
+import React from 'react';
 
-    var Timer = React.createClass({
+var Timer = React.createClass({
 
-      getInitialState: function() {
+    getInitialState: function() {
+        if (this.props.isEnabled) {
+            this.startTimer();
+        }
+
         return {
             secondsRemaining: 60
+        };
+    },
+
+    componentWillReceiveProps: function(props) {
+        if (props.isEnabled) {
+            this.startTimer();
         }
-      },
+    },
 
-      resetTimer: function(){
+    resetTimer: function() {
         clearInterval(this.interval);
-      },
+    },
 
-      tick: function(){
-        this.setState({secondsRemaining: this.state.secondsRemaining - 1});
+    startTimer: function() {
+        if (!this.interval) {
+            this.interval = setInterval(this.tick, 1000);
+        }
+    },
+
+    tick: function() {
+        this.setState({
+            secondsRemaining: this.state.secondsRemaining - 1
+        });
+
         if (this.state.secondsRemaining <= 0 ) {
             this.resetTimer();
         }
-      },
+    },
 
-      startTimer: function() {
-        this.interval = setInterval(this.tick, 1000);
-      },
-
-      componentWillReceiveProps: function(props) {
-          if(props.startCountDown === true) {
-              this.startTimer();
-          }
-      },
-
-      render: function() {
+    render: function() {
         return (
-            <div>
-              <p className="timer">{this.state.secondsRemaining}</p>
+            <div className="timer">
+                {this.state.secondsRemaining}
             </div>
         );
-      }
-    });
+    }
+});
 
-    module.exports = Timer;
+module.exports = Timer;
