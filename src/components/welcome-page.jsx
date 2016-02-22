@@ -6,7 +6,7 @@ var WelcomePage = React.createClass({
         browserHistory.push('/mars-quiz');
        },
 
-    render: function(){
+    render(){
         return (
             <div>
                 <button className="take-test-button" onClick={this.takeQuiz}>Take Test</button>

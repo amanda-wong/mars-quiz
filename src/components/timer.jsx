@@ -2,7 +2,7 @@ import React from 'react';
 
 var Timer = React.createClass({
 
-    getInitialState: function() {
+    getInitialState() {
         if (this.props.isEnabled) {
             this.startTimer();
         }
@@ -12,23 +12,23 @@ var Timer = React.createClass({
         };
     },
 
-    componentWillReceiveProps: function(props) {
+    componentWillReceiveProps(props) {
         if (props.isEnabled) {
             this.startTimer();
         }
     },
 
-    resetTimer: function() {
+    resetTimer() {
         clearInterval(this.interval);
     },
 
-    startTimer: function() {
+    startTimer() {
         if (!this.interval) {
             this.interval = setInterval(this.tick, 1000);
         }
     },
 
-    tick: function() {
+    tick() {
         this.setState({
             secondsRemaining: this.state.secondsRemaining - 1
         });
@@ -38,7 +38,7 @@ var Timer = React.createClass({
         }
     },
 
-    render: function() {
+    render() {
         return (
             <div className="timer">
                 {this.state.secondsRemaining}
